@@ -1,0 +1,12 @@
+# Tray items to recolor to the Omarchy bar foreground, one per line.
+#
+# A name is matched as a lowercased substring of a tray item's id, title or
+# tooltip, so "remmina" catches the item whose id is "remmina-icon".
+#
+# Run ./install.sh --list to see what is currently on your bar.
+#
+# Only list MONOCHROME icons. A full-color status icon carries meaning in its
+# color, and recoloring it to a flat silhouette throws that meaning away.
+
+remmina
+lerd
