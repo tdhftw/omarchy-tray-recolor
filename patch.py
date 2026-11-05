@@ -173,9 +173,14 @@ def patch_tray_qml(text):
     fail("Tray.qml: could not find TrayIcon's `symbolic` binding")
   text = text.replace(STOCK_SYMBOLIC, STANDALONE_SYMBOLIC, 1)
 
-  if STOCK_EFFECT not in text:
-    fail("Tray.qml: could not find TrayIcon's recoloring MultiEffect")
-  text = text.replace(STOCK_EFFECT, STANDALONE_EFFECT, 1)
+  if STOCK_EFFECT in text:
+    # Omarchy < 4.5 tinted symbolic icons, which leaves a darker glyph muddy;
+    # swap in a silhouette for recolored items.
+    text = text.replace(STOCK_EFFECT, STANDALONE_EFFECT, 1)
+  elif "maskSource: trayIconImage" not in text:
+    # 4.5+ already draws every symbolic icon as a silhouette, so a recolored
+    # item needs nothing beyond counting as symbolic. Anything else is unknown.
+    fail("Tray.qml: could not find TrayIcon's recoloring effect")
 
   # Feed each TrayIcon the item its icon came from. Both call sites already have
   # `modelData` in scope; indentation is copied from the icon line.

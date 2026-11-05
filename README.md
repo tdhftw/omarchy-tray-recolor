@@ -118,6 +118,9 @@ clone yet, `install.sh` makes one with `omarchy plugin clone omarchy.tray`.
 Rendering is a `MultiEffect` masking a solid `bar.foreground` rectangle through
 the icon's alpha. It deliberately does **not** use colorization, which preserves
 luminance and would dim the silhouette by the foreground's own brightness.
+Omarchy 4.5 draws every symbolic icon this way itself, so on 4.5 and later the
+patch only marks the listed items as symbolic and leaves the drawing to the
+stock tray. On older trays, which tinted, it installs the silhouette effect.
 
 It also deliberately touches only the icon *rendering*, never `classifyItem()`,
 so a recolored item keeps its normal pinned / drawer / hidden placement.
